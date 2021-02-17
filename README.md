@@ -23,11 +23,7 @@ $ git clone https://github.com/jeanrp/eventfinder.git
 ```
 $ on the root of the project do: dotnet build && dotnetrun
 ```
-
-```
-$ 
-```
-
+ 
 ```
 $ cd frontend/mobile/eventfinder && npm install
 ```
