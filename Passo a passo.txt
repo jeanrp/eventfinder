@@ -1,0 +1,9 @@
+Para a WEB API, será encessário uma IDE como o visual studio, para desenvolvimento da aplicação, foi utilizada a versão 2017. 
+
+Para rodar tanto a aplicação web como mobile, pode-se usar qualquer tipo de IDE como brackets, visual studio code, sublime, que emule outro servidor, para nao gerar problema de CORS.
+
+1- Rodar a WEB API que tá está localizada dentro da solution na raíz do diretório com o nome de EventFinder.sln.
+2- Rodar o Mobile/Web na IDE que desejar para que faça acesso a WEB API.
+
+
+Fim!
