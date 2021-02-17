@@ -1,0 +1,22 @@
+<div class="collapse navbar-collapse navbar-ex1-collapse" [collapse]="mostrarMenu">
+    <ul class="nav navbar-nav side-nav">
+      <li>
+        <a class="links-menu-lateral" (click)="empresaMenuCollapsed = !empresaMenuCollapsed"><i class="fa fa-sitemap"></i> Empresa <i [ngClass]="!empresaMenuCollapsed  ? 'fa fa-fw pull-right fa-angle-down' : 'fa fa-fw pull-right fa-angle-right'"></i></a>
+        <ul id="submenu-1" [collapse]="empresaMenuCollapsed" class="collapse in" aria-expanded="true" >
+          <li><a class="links-menu-lateral"><i class="fa fa-sitemap"></i> Empresa</a></li>
+          <li><a class="links-menu-lateral"><i class="fa fa-group"></i> Equipes</a></li>
+          <li><a class="links-menu-lateral"><i class="fa fa-tasks"></i> Atividades</a></li>
+          <li><a class="links-menu-lateral"><i class="fa fa-commenting-o"></i> Mensagens</a></li>
+        </ul>
+      </li>
+      <li>
+        <a class="links-menu-lateral" (click)="eventoMenuCollapsed = !eventoMenuCollapsed"><i class="fa fa-tag"></i>  Eventos <i [ngClass]="!eventoMenuCollapsed  ? 'fa fa-fw pull-right fa-angle-down' : 'fa fa-fw pull-right fa-angle-right'"></i></a>
+        <ul id="submenu-2" class="collapse" aria-expanded="false" [collapse]="eventoMenuCollapsed" style="height: 1px;">
+          <li><a class="links-menu-lateral" [routerLink]="['/gerenciamento/listar-eventos']"><i class="fa fa-tag"></i> Eventos</a></li>
+          <li><a class="links-menu-lateral"><i class="fa fa-calendar"></i> Promoções</a></li>
+          <li><a class="links-menu-lateral"><i class="fa fa-file-text-o"></i> Relatórios</a></li>
+        </ul>
+      </li>
+      
+    </ul>
+  </div>

@@ -1,0 +1,72 @@
+<div id="throbber" style="display:none; min-height:120px;">
+
+</div>
+<div id="noty-holder"></div>
+<div id="wrapper">
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <app-menu-superior></app-menu-superior>
+    <div class="container-fluid">
+      <div class="row">
+        <app-menu-lateral></app-menu-lateral>
+      </div>
+    </div>
+  </nav>
+
+  <div id="page-wrapper">
+    <div class="container-fluid">
+      <div class="row" id="main">
+        <div class="col-sm-12 col-md-12 well conteudoPaginaGerenciamento">
+
+          <div class="container main-container">
+            <div class="row">
+              <h2 class="pull-left">Meus Eventos</h2><a class="btn btn-success" id="novoEvento" style="margin-top:20px;margin-left:15px;" [routerLink]="['/gerenciamento/adicionar-evento']"> <span title="Novo Evento" class="glyphicon glyphicon-plus-sign"></span> Novo Evento</a>
+            </div>
+            <div class="row">
+            <hr style="margin-top:0px !important;margin-bottom:10px !important;border:1px solid gray !important;" />
+            </div>
+            <div class='text-danger' *ngIf='errorMessage'>{{errorMessage}}</div>
+
+            <div class="page-size">
+              <div class="panel panel-default" style="border:none;">
+                <div *ngIf='eventos && eventos.length' class="lista-de-eventos">
+                     <a class="list-group-item active" *ngFor='let evento of eventos'>
+                      <div class="media col-sm-4">
+                        <figure class="pull-left">
+                        <img class="media-object img-rounded img-responsive" style="height:130px !important; width: 100%;" src="data:image/jpg;base64,{{evento.fotos[0].imagem}}" alt="placehold.it/350x250">
+                        </figure>
+                      </div>
+                      <div class="col-sm-6">
+                        <h4 class="list-group-item-heading"> {{ evento.nome }}</h4>
+                        <p class="list-group-item-text"> 
+                          {{ evento.descricao.length > 250 ? evento.descricao.substring(0,250) : evento.descricao }}
+                        </p>
+                      </div>
+                      <div class="col-sm-2 text-center" >
+                        <div class="col-sm-6 nopadding">
+                            <time class="start green img-rounded">
+                                Início <span class="day"> {{evento.dataHoraInicio | date:'d' }} </span>
+                                <span class="hour">{{evento.dataHoraInicio | date:'h:mm'}} </span>
+                                <span class="month">{{ formatarData(evento.dataHoraInicio | date:'MM') }} </span>
+                                <span class="year">{{evento.dataHoraInicio | date:'y' }}</span>
+                            </time>
+                        </div>
+                        <div class="col-sm-6 nopadding">
+                            <time class="end red  img-rounded">
+                                fim <span class="day">{{evento.dataHoraFim | date:'d'}} </span>
+                                <span class="hour">{{evento.dataHoraFim | date:'h:mm'}} </span>
+                                <span class="month">{{ formatarData(evento.dataHoraFim | date:'MM') }} </span>
+                                <span class="year">{{evento.dataHoraFim | date:'y'}}</span>
+ 
+                            </time>
+                        </div>
+                       </div>
+                    </a>
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar style="background-color:black !important;">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Eventos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="card-background-page" *ngIf='eventos && eventos.length' id="conteudoListaEvento">
+  <ion-card *ngFor="let evento of eventos">
+    <img [src]="'data:image/jpg;base64,' + evento.fotos[0].imagem" class="imagem-evento" />
+    <ion-card-content>
+      <ion-card-title>
+        {{ evento.nome }}
+      </ion-card-title>
+      <p>
+        {{ evento.descricao.length > 150 ? evento.descricao.substring(0,150) : evento.descricao }}
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="danger" class="botao-detalhes" icon-start (click)="mostrarDetalheEvento(evento)">
+          <ion-icon name='search'></ion-icon>
+          Detalhes
+        </button>
+      </ion-col>
+      <ion-col>
+        <time class="start green img-rounded">
+          Início <span class="day"> {{evento.dataHoraInicio | date:'d' }} </span>
+          <span class="hour">{{evento.dataHoraInicio | date:'h:mm'}} </span>
+          <span class="month">{{ formatarData(evento.dataHoraInicio | date:'MM') }} </span>
+          <span class="year">{{evento.dataHoraInicio | date:'y' }}</span>
+        </time>
+        <time class="end red  img-rounded">
+          fim <span class="day">{{evento.dataHoraFim | date:'d'}} </span>
+          <span class="hour">{{evento.dataHoraFim | date:'h:mm'}} </span>
+          <span class="month">{{ formatarData(evento.dataHoraFim | date:'MM') }} </span>
+          <span class="year">{{evento.dataHoraFim | date:'y'}}</span>
+        </time>
+      </ion-col>
+
+    </ion-row>
+
+
+  </ion-card>
+
+</ion-content>

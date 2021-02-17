@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="fechar()">
+        <span ion-text color="primary" showWhen="ios">Cancelar</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>EventFinder</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p class="text-center">
+    <img [src]="'data:image/jpg;base64,' + evento.fotos[0].imagem" class="img-rounded img-responsive imagem-evento" />
+
+  </p>
+  <h1>{{evento.nome}}</h1>
+  <p>{{evento.descricao}}</p>
+
+  <br />
+  <hr /> Ingressos
+<hr/>
+  <ion-list>
+    <ion-row *ngFor="let ingresso of evento.ingressos">
+      <ion-col width-50>
+        <ion-item>
+          <p>Tipo: {{ ingresso.tipo }}</p>
+        </ion-item>
+      </ion-col>
+      <ion-col width-50>
+        <ion-item>
+          <p>Preço: {{ ingresso.preco }}</p>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <br />
+  <hr /> Atrações
+  <hr/>
+  <ion-list>
+    <ion-row *ngFor="let atracao of evento.atracoes">
+      <ion-col width-50>
+        <ion-item>
+          <p>Nome: {{ atracao.nome }}</p>
+        </ion-item>
+      </ion-col>
+      <ion-col width-50>
+        <ion-item>
+          <p>Estilo: {{ atracao.estilo }}</p>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</ion-content>

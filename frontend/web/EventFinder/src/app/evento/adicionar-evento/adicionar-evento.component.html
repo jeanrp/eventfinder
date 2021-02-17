@@ -1,0 +1,420 @@
+ 
+<div id="throbber" style="display:none; min-height:120px;">
+
+</div>
+<div id="noty-holder"></div>
+<div id="wrapper">
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <app-menu-superior></app-menu-superior>
+    <div class="container-fluid">
+      <div class="row">
+        <app-menu-lateral></app-menu-lateral>
+      </div>
+    </div>
+  </nav>
+
+  <div id="page-wrapper">
+    <div class="container-fluid">
+      <div class="row" id="main">
+        <div class="col-sm-12 col-sm-12 well conteudoPaginaGerenciamento">
+          <div class="container main-container">
+            <h2>Novo Evento</h2>
+            <hr />
+
+
+            <form novalidate (ngSubmit)="adicionarEvento()" [formGroup]="eventoForm">
+              <div class="form-horizontal">
+                <fieldset>
+                  <legend class="titulo">Geral</legend>
+                  <div class="alert alert-danger" *ngIf="errors.length > 0">
+                    <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                    <ul>
+                      <li *ngFor="let error of errors">{{ error }}</li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <image-upload buttonCaption="Adicionar Imagem" dropBoxMessage="Jogue suas imagens aqui" (uploadFinished)="onUploadFinished($event)"
+                      (removed)="onRemoved($event)" clearButtonCaption="Limpar" url="http://localhost:59084/api/v1/fotos"></image-upload>
+                  </div>
+                  <div class="row" style="margin-top:20px;">
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.nome }">
+                      <label class="col-sm-3 control-label" for="nome">Nome: </label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome" />
+                        <span class="text-danger" *ngIf="displayMessage.nome"><p [innerHTML]="displayMessage.nome"></p></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.subDescricao }">
+                      <label class="col-sm-3 control-label" for="subDescricao">Desc curta:</label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="subDescricao" type="text" placeholder="Descrição curta" formControlName="subDescricao" />
+                        <span class="text-danger" *ngIf="displayMessage.subDescricao"><p [innerHTML]="displayMessage.subDescricao"></p></span>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.descPatrocinadores }">
+                      <label class="col-sm-3 control-label" for="descPatrocinadores">Patrocinadores:</label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="descPatrocinadores" type="text" placeholder="Patrocinadores" formControlName="descPatrocinadores"
+                        />
+                        <span class="text-danger" *ngIf="displayMessage.descPatrocinadores"><p [innerHTML]="displayMessage.descPatrocinadores"></p></span>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.dataInicio }">
+                      <label class="col-sm-3 control-label" for="dataInicio">Data de Início:</label>
+                      <div class="col-sm-9">
+                        <my-date-picker id="dataInicio" name="dataInicio" [options]="myDatePickerOptions" (inputFocusBlur)="onInputFocusBlurDataInicio($event)" formControlName="dataInicio"></my-date-picker>
+                        <span class="text-danger" *ngIf="displayMessage.dataInicio"><p [innerHTML]="displayMessage.dataInicio"></p></span>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.horaInicio }">
+                      <label class="col-sm-3 control-label" for="horaInicio">Hora Início:</label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="horaInicio" type="text" placeholder="Hora ínicio (requerido)" [textMask]="{mask: horaMask}"
+                          formControlName="horaInicio" /> <span class="text-danger" *ngIf="displayMessage.horaInicio"><p [innerHTML]="displayMessage.horaInicio"></p></span>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.dataFim }">
+                      <label class="col-sm-3 control-label" for="dataFim">Data Fim:</label>
+                      <div class="col-sm-9">
+                        <my-date-picker id="dataFim" name="dataFim" (inputFocusBlur)="onInputFocusBlurDataFim($event)" [options]="myDatePickerOptions" formControlName="dataFim"></my-date-picker>
+                        <span class="text-danger" *ngIf="displayMessage.dataFim"> <p [innerHTML]="displayMessage.dataFim"></p></span>
+                      </div>
+
+                    </div>
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.horaFim }">
+                      <label class="col-sm-3 control-label" for="horaFim">Hora Fim:</label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="horaFim" type="text" placeholder="Hora de encerramento (requerido)" [textMask]="{mask: horaMask}"
+                          formControlName="horaFim" />
+                        <span class="text-danger" *ngIf="displayMessage.horaFim"><p [innerHTML]="displayMessage.horaFim"></p></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.categoriaId }">
+                      <label class="col-sm-3 control-label" for="descricao">Descrição:</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" rows="5" id="descricao" type="text" placeholder="Descrição (requerido)" formControlName="descricao"> </textarea>
+                        <span class="text-danger" *ngIf="displayMessage.descricao"><p [innerHTML]="displayMessage.descricao"></p></span>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.categoriaId }">
+                      <label class="col-sm-3 control-label" for="categoriaId">Categoria: </label>
+                      <div class="col-sm-9">
+                        <select class="form-control" id="categoriaId" formControlName="categoriaId">
+                          <option value="" selected>Selecione a categoria</option>
+                          <option *ngFor="let categoria of categorias" value="{{categoria.id}}" >{{ categoria.descricao }}</option>
+                        </select>
+                        <span class="text-danger" *ngIf="displayMessage.categoriaId"><p [innerHTML]="displayMessage.categoriaId"></p></span>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <br />
+                <fieldset class="bloco-endereco">
+                  <legend class="titulo">
+                    Endereço
+                  </legend>
+
+                  <div class="row">
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.logradouro }">
+                      <label class="col-sm-3 control-label" for="logradouro">Logradouro: </label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="logradouro" type="text" placeholder="Logradouro (requerido)" formControlName="logradouro"
+                        /><span class="text-danger" *ngIf="displayMessage.logradouro"><p [innerHTML]="displayMessage.logradouro"></p></span>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.numero }">
+                      <label class="col-sm-3 control-label" for="numero">Numero: </label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="numero" type="text" placeholder="Numero (requerido)" formControlName="numero" />
+                        <span class="text-danger" *ngIf="displayMessage.numero"><p [innerHTML]="displayMessage.numero"></p></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.cep }">
+                      <label class="col-sm-3 control-label" for="cep">Cep: </label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="cep" type="text" [textMask]="{mask:cepMask}" placeholder="Cep (requerido)" formControlName="cep"
+                        />
+                        <span class="text-danger" *ngIf="displayMessage.cep">
+                          <p [innerHTML]="displayMessage.cep"></p>
+                          </span>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.bairro }">
+                      <label class="col-sm-3 control-label" for="bairro">Bairro: </label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="bairro" type="text" placeholder="Bairro (requerido)" formControlName="bairro" />
+                        <span class="text-danger" *ngIf="displayMessage.bairro"><p [innerHTML]="displayMessage.bairro"></p></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.cidade }">
+                      <label class="col-sm-3 control-label" for="cidade">Cidade: </label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="cidade" type="text" placeholder="Cidade (requerido)" formControlName="cidade" />
+                        <span class="text-danger" *ngIf="displayMessage.cidade">
+                          <p [innerHTML]="displayMessage.cidade"></p>
+                          </span>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.estadoId }">
+                      <label class="col-sm-3 control-label" for="estadoId">Estado: </label>
+                      <div class="col-sm-9">
+                        <select class="form-control" id="estadoId" formControlName="estadoId">
+                          <option value="" selected>Selecione o Estado</option>
+                          <option *ngFor="let estado of estados" value="{{estado.id}}" >{{ estado.uf }}</option>
+                        </select>
+                        <span class="text-danger" *ngIf="displayMessage.estadoId"><p [innerHTML]="displayMessage.estadoId"></p></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-6" [ngClass]="{'has-error': displayMessage.complemento }">
+                      <label class="col-sm-3 control-label" for="complemento">Complemento: </label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="complemento" type="text" placeholder="Complemento" formControlName="complemento" />
+                        <span class="text-danger" *ngIf="displayMessage.escomplementoadoId"><p [innerHTML]="displayMessage.complemento"></p></span>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <br />
+                <div id="AtracaoPartial">
+                  <fieldset>
+                    <legend class="titulo">
+                      Atrações <button type="button" class="btn btn-success botao-adicionar-atracao" (click)="openModal(template)">
+                                <i title="Incluir Atracao" class="fa fa-plus"></i> Atração
+                          </button>
+                    </legend>
+
+                    <table class="table table-hover" *ngIf="evento.atracoes">
+                      <thead>
+                        <tr>
+                          <th>Nome</th>
+                          <th>Estilo</th>
+                          <th>Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let atracao of evento.atracoes">
+                          <td>
+                            {{ atracao.nome }}
+                          </td>
+                          <td>
+                            {{ atracao.estilo }}
+                          </td>
+                          <td>
+                            <button (click)="removerAtracao(atracao.nome)" title="Excluir" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </fieldset>
+                </div>
+
+                <br />
+                <div id="IngressoPartial">
+                  <fieldset>
+                    <legend class="titulo">
+                      Ingressos
+                      <button type="button" class="btn btn-success botao-adicionar-atracao" (click)="openModalIngresso(templateIngresso)">
+                        <i title="Incluir Ingresso" class="fa fa-plus"></i> Ingresso
+                      </button>
+                    </legend>
+                    <table class="table table-hover" *ngIf="evento.ingressos">
+                      <thead>
+                        <tr>
+                          <th>Tipo</th>
+                          <th>Preço</th>
+                          <th>Lote</th>
+                          <th>Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let ingresso of evento.ingressos">
+                          <td>
+                            {{ ingresso.tipo }}
+                          </td>
+                          <td>
+                            {{ ingresso.preco | currency:'BRL':true:'1.2-2' }}
+                          </td>
+                          <td>
+                            {{ ingresso.lote }}
+                          </td>
+                          <td>
+                            <button (click)="removerIngresso(ingresso.tipo)" title="Excluir" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </fieldset>
+                </div>
+
+
+
+                <div class="form-group">
+                  <div class="pull-right" style="margin-right:6.5%">
+                    <span><button class="btn btn-primary" id="adicionarEvento" type="submit" [disabled]='!eventoForm.valid'><i class="fa fa-save"></i>&nbsp; Salvar</button></span>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <ng-template #template>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">Adicionar Atração</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+              </div>
+              <form novalidate [formGroup]="atracaoForm">
+                <div class="modal-body">
+                  <div class="form-horizontal">
+                    <div class="alert alert-danger" *ngIf="errorsAtracao.length > 0">
+                      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                      <ul>
+                        <li *ngFor="let error of errorsAtracao">{{ error }}</li>
+                      </ul>
+                    </div>
+                    <div class="form-group" [ngClass]="{'has-error': atracaoForm.controls.nome.invalid  && (atracaoForm.controls.nome.dirty || atracaoForm.controls.nome.touched) }">
+                      <label class="col-md-2 control-label">Nome</label>
+                      <div class="col-md-10">
+                        <input class="form-control" type="text" placeholder="Nome (requerido)" formControlName="nome" />
+                        <span class="text-danger" *ngIf="atracaoForm.controls.nome.invalid  && (atracaoForm.controls.nome.dirty || atracaoForm.controls.nome.touched)">
+                           <p *ngIf="atracaoForm.controls.nome.errors.required">
+                            O nome é requerido
+                          </p>                   
+                       <p *ngIf="atracaoForm.controls.nome.errors.minlength">
+                            O estilo deve ter no mínimo 2 caracteres
+                          </p>
+                          <p *ngIf="atracaoForm.controls.nome.errors.maxlength">
+                            O estilo deve ter no máximo 150 caracteres
+                          </p>   
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group" [ngClass]="{'has-error': atracaoForm.controls.estilo.invalid  && (atracaoForm.controls.estilo.dirty || atracaoForm.controls.estilo.touched) }">
+                      <label class="col-md-2 control-label" for="estilo">Estilo</label>
+                      <div class="col-md-10">
+                        <input class="form-control" type="text" placeholder="Estilo (requerido)" formControlName="estilo" />
+                        <span class="text-danger" *ngIf="atracaoForm.controls.estilo.invalid  && (atracaoForm.controls.estilo.dirty || atracaoForm.controls.estilo.touched)">
+                        <p *ngIf="atracaoForm.controls.estilo.errors.required">
+                            O estilo é requerido
+                          </p>                   
+                       <p *ngIf="atracaoForm.controls.estilo.errors.minlength">
+                            O estilo deve ter no mínimo 2 caracteres
+                          </p>
+                          <p *ngIf="atracaoForm.controls.estilo.errors.maxlength">
+                            O estilo deve ter no máximo 100 caracteres
+                          </p>   
+                        </span> </div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <div class="col-md-offset-2 col-md-10">
+                    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()"><i class="fa fa-close"></i>&nbsp;&nbsp;Fechar </button>
+                    <button class="btn btn-primary" type="button" (click)='adicionarAtracao()' [disabled]='!atracaoForm.valid'><i class="fa fa-save"></i>&nbsp;&nbsp;Salvar</button>
+                  </div>
+                </div>
+              </form>
+            </ng-template>
+
+
+            <ng-template #templateIngresso>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">Adicionar Ingresso</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefIngresso.hide()"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form novalidate [formGroup]="ingressoForm">
+                <div class="modal-body">
+                  <div class="form-horizontal">
+                    <div class="alert alert-danger" *ngIf="errorsIngresso.length > 0">
+                      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                      <ul>
+                        <li *ngFor="let error of errorsIngresso">{{ error }}</li>
+                      </ul>
+                    </div>
+                    <div class="form-group" [ngClass]="{'has-error': ingressoForm.controls.tipo.invalid  && (ingressoForm.controls.tipo.dirty || ingressoForm.controls.tipo.touched) }">
+                      <label class="col-md-2 control-label" for="tipo">Tipo:</label>
+                      <div class="col-md-10">
+                        <input class="form-control" type="text" placeholder="Tipo (requerido)" formControlName="tipo" />
+                        <span class="text-danger" *ngIf="ingressoForm.controls.tipo.invalid  && (ingressoForm.controls.tipo.dirty || ingressoForm.controls.tipo.touched)">
+                           <p *ngIf="ingressoForm.controls.tipo.errors.required">
+                            O tipo é requerido
+                          </p>                   
+                       <p *ngIf="ingressoForm.controls.tipo.errors.minlength">
+                            O tipo deve ter no mínimo 2 caracteres
+                          </p>
+                          <p *ngIf="ingressoForm.controls.tipo.errors.maxlength">
+                            O tipo deve ter no máximo 50 caracteres
+                          </p>   
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group" [ngClass]="{'has-error': ingressoForm.controls.preco.invalid  && (ingressoForm.controls.preco.dirty || ingressoForm.controls.preco.touched) }">
+                      <label class="col-md-2 control-label" for="preco">Preço:</label>
+                      <div class="col-md-10">
+                        <input currencyMask class="form-control" type="text" placeholder="Preço (requerido)" [options]="{ align: 'left', prefix: 'R$', thousands: '.', decimal: ','}"
+                          formControlName="preco" />
+                        <span class="text-danger" *ngIf="ingressoForm.controls.preco.invalid  && (ingressoForm.controls.preco.dirty || ingressoForm.controls.preco.touched)">
+                        <p *ngIf="ingressoForm.controls.preco.errors.required">
+                            O Preço é requerido
+                          </p>                   
+                  
+                        </span> </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{'has-error': ingressoForm.controls.lote.invalid  && (ingressoForm.controls.lote.dirty || ingressoForm.controls.lote.touched) }">
+                      <label class="col-md-2 control-label" for="lote">Lote:</label>
+                      <div class="col-md-10">
+                        <input class="form-control" type="text" placeholder="Lote (requerido)" [textMask]="{mask:loteMask}" formControlName="lote"
+                        />
+                        <span class="text-danger" *ngIf="ingressoForm.controls.lote.invalid  && (ingressoForm.controls.lote.dirty || ingressoForm.controls.lote.touched)">
+                        <p *ngIf="ingressoForm.controls.lote.errors.required">
+                            O Lote é requerido
+                          </p>                   
+                  
+                        </span> </div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <div class="col-md-offset-2 col-md-10">
+                    <button type="button" class="btn btn-secondary" (click)="modalRefIngresso.hide()"><i class="fa fa-close"></i>&nbsp;&nbsp;Fechar </button>
+                    <button class="btn btn-primary" type="button" (click)='adicionarIngresso()' [disabled]='!ingressoForm.valid'><i class="fa fa-save"></i>&nbsp;&nbsp;Salvar</button>
+                  </div>
+                </div>
+              </form>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

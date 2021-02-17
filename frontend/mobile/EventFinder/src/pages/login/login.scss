@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+
+.bg-style {
+    background: rgb(10, 68, 130) !important; 
+}
+
+.mensagem-error
+{
+    color:red !important;
+    // background: rgb(10, 68, 130) !important;
+
+}
+.grupo-mensagem-erro
+{
+    background: rgb(10, 68, 130) !important; 
+}
+
+.botao-cadastrar
+{
+    margin-top:10px;
+}
+
+.label-cadastro
+{
+    background: rgb(10, 68, 130) !important;
+
+}
+
+.label-cadastro p
+{
+color:white;
+font-size:20px;
+ font-weight:bold !important;
+   transition: all 400ms cubic-bezier(.4,0,.2,1);
+
+}
+
+.label-cadastro p:hover
+{
+  transition: all 400ms cubic-bezier(.4,0,.2,1) !important;
+  color: #23BAB5 !important;
+  cursor:pointer;
+}
+
+
+.titulo-app 
+{
+font-size:36px;
+margin-bottom:100px;
+margin-top:100px;
+color: white;
+ text-transform:uppercase;
+font-family: 'Abril Fatface', cursive;
+
+}
+
+
+
+ .btn-logar:hover,.btn-success:focus {
+  background: rgba(26, 161, 157, 0);
+  border: 2px solid #1aa19d;
+  webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
+  transition: all 400ms cubic-bezier(.4,0,.2,1);
+  color: #23BAB5;
+}
+.btn-logar {
+    margin-bottom:10px;
+  background: #23bab5;
+  border-radius:0;
+  border: 2px solid #23bab5;
+  webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
+  transition: all 400ms cubic-bezier(.4,0,.2,1);
+}
+
+
+
+
+
+
+    .rounded {
+        width: 100%;
+        height: 100px;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 10px;
+        margin-bottom: 10px;  
+        height:50%;        
+    }
+ 
+    .label-campo-texto
+    { 
+     -webkit-flex: 0 0 50px;
+    -ms-flex: 0 0 50px;
+    flex: 0 0 50px !important;
+    width: 50px !important;
+    min-width: 50px !important;
+    max-width: 50px !important;
+    }
+ 

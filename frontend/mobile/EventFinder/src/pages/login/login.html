@@ -1,0 +1,41 @@
+<ion-content padding class="bg-style">
+  <p class="text-center titulo-app" >EventFinder</p>
+  <ion-list no-lines>
+    <form novalidate (ngSubmit)="logar()" [formGroup]="loginForm">       
+      <ion-item class="rounded">
+        <ion-label class="label-campo-texto" fixed>Email</ion-label>
+        <ion-input class="campo-texto" type="text" formControlName="email"></ion-input>
+
+      </ion-item>
+      <ion-item class="grupo-mensagem-erro" *ngIf="loginForm.controls.email.invalid  && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">
+        <p *ngIf="loginForm.controls.email.errors.required" class="mensagem-error">
+          O email é requerido
+        </p>
+        <p *ngIf="loginForm.controls.email.errors.email" class="mensagem-error">
+          O e-mail está num formato inválido
+        </p>
+      </ion-item>
+
+      <ion-item class="rounded">
+        <ion-label class="label-campo-texto"  fixed> Senha</ion-label>
+        <ion-input class="campo-texto" type="password" formControlName="senha"></ion-input>
+      </ion-item>
+      <ion-item class="grupo-mensagem-erro" *ngIf="loginForm.controls.senha.invalid  && (loginForm.controls.senha.dirty || loginForm.controls.senha.touched)">
+        <p *ngIf="loginForm.controls.senha.errors.required" class="mensagem-error">
+          A senha é requerida
+        </p>
+        <p *ngIf="loginForm.controls.senha.errors.minlength" class="mensagem-error">
+          A senha deve ter no mínimo 6 caracteres
+        </p>
+      </ion-item>
+      <button class="btn-logar" ion-button large block [disabled]="!loginForm.valid" (click)="logar()">ENTRAR</button>    
+      <button class="facebook-sign-in button button-block" ion-button large block  style="text-transform: none;"   (click)="logarComFacebook()"> Logar com o facebook </button>    
+      <hr style="width:42%;float:left;border:1px solid gray;" />  <span>&nbsp;&nbsp;OU</span> <hr style="width:45%;float:right;border:1px solid gray;" /> 
+      <ion-item class="label-cadastro">
+        <p class="text-center" (click)="cadastrar()">Faça seu cadastro</p>
+      </ion-item>
+
+    </form>
+  </ion-list>
+
+</ion-content>

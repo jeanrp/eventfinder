@@ -1,0 +1,32 @@
+<article role="logar">
+    <div class="text-center" style="font-weight:bold;margin-bottom:10px;margin-top:10px;">Faça login com seu usuário</div>
+    <form novalidate (ngSubmit)="logar()" [formGroup]="loginForm">
+        <div class="alert alert-danger" *ngIf="errors.length > 0">
+            <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+            <ul>
+                <li *ngFor="let error of errors">
+                    {{ error }}
+                </li>
+            </ul>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': displayMessage.email}">
+            <input type="text" id="email" class="form-control" formControlName="email" placeholder="Email (requerido)">
+            <span class="text-danger" *ngIf="displayMessage.email">
+                                <p [innerHTML]="displayMessage.email">  </p>
+                            </span>
+ 
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': displayMessage.senha}">
+            <input type="password" id="senha" class="form-control" formControlName="senha" placeholder="Senha(requerido)">
+            <span class="text-danger" *ngIf="displayMessage.senha">
+                                <p [innerHTML]="displayMessage.senha">  </p>
+                            </span>
+        </div>
+        <div>
+            <div class="form-group">
+                <button class="btn btn-success btn-block" id="Registrar" type="submit" [disabled]="!loginForm.valid">Login</button>
+                <button class="btn btn-primary btn-block" style="font-weight:bold;" id="btnFacebook" (click)="logarComFacebook()"><i class="fa fa-facebook-official" style="font-size:20px"></i> Logar com o Facebook</button>
+            </div>
+        </div>
+    </form>
+</article>

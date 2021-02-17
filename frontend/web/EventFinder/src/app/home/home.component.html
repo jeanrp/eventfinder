@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand text-white logo"  href="#"> EventFinder</a>
+    </div>
+</nav>
+
+<div class="main-container">
+    <div class="row">
+        <div class="carousel-inner">
+            <carousel>
+                <slide>
+                    <div class="item active">
+                        <img src="http://placehold.it/2000x650/16a085/000&text=Sobre Nós">
+                        <div class="carousel-caption">
+                            <h3>Organize Conosco!</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                                aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+                        </div>
+                    </div>
+                </slide>
+                <slide>
+                    <div class="item active">
+                        <img src="http://placehold.it/2000x650/e67e22/000&text=Eventos">
+                        <div class="carousel-caption">
+                            <h3>Eventos Técnicos</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                                aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+                        </div>
+                    </div>
+                </slide>
+                <slide>
+                    <div class="item active">
+                        <img src="http://placehold.it/2000x650/2980b9/000&text=Ganhe Dinheiro">
+                        <div class="carousel-caption">
+                            <h3>Venda seus Eventos</h3>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                                ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur
+                                sadipscing elitr.</p>
+                        </div>
+                    </div>
+                </slide>
+            </carousel>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row">
+            <h3 class="display-4 text-center" id="autenticacao"> Autenticação </h3>
+            <hr class="col-sm-2 col-sm-offset-5" />            
+        </div>
+        <div class="row" id="linhaLogin">
+            <div class="col-sm-3">
+            </div>
+            <tabset class="col-sm-5">
+                <tab heading="Logar" customClass="tab-autenticacao">
+                    <app-autenticacao></app-autenticacao>
+                </tab>
+                <tab heading="Cadastrar" customClass="tab-autenticacao">
+                    <app-inscricao></app-inscricao>
+                </tab>
+            </tabset>
+            <div class="gap-space">
+            </div>
+        </div>
+        <footer class="footer-bs">
+            <div class="row">
+                <div class="col-md-3 footer-brand animated fadeInLeft">
+                    <h2><a [routerLink]="['home']" class="footer-brand">EventFinder</a></h2>
+                    <p>Gestão autonoma de eventos para empresas, organizações e comunidades técnicas. Organize seu evento e
+                        ganhe dinheiro vendendo ingressos, cobramos a menos taxa do mercado.
+                    </p>
+                    <p>© 2017 - EventFinder</p>
+                </div>
+                <div class="col-md-3 footer-nav animated fadeInUp">
+                    <h4>Menu</h4>
+                    <ul>
+                        <li><a href="#">Sobre</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-social animated fadeInDown">
+                    <h4>Siga-nos</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">RSS</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-ns animated fadeInRight">
+                    <h4>Newsletter</h4>
+                    <p>Inscreva-se para ficar por dentro de todos os eventos</p>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="seu e-mail">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                          <span class="glyphicon glyphicon-envelope"></span>
+                        </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>

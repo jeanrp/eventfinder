@@ -1,0 +1,113 @@
+<ion-header>
+
+  <ion-navbar>
+   <ion-buttons left>
+        <button  ion-button (click)="logar()">
+              Voltar
+         </button>
+    </ion-buttons>
+    <ion-title class="text-center titulo-inscricao" showWhen="ios">CADASTRO</ion-title>    
+    <ion-title class="titulo-inscricao" style="margin-left:60px;" showWhen="android,windows">CADASTRO</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list no-lines>
+    <form novalidate (ngSubmit)="cadastrar()" [formGroup]="inscricaoForm">
+      <ion-item>
+        <ion-label stacked>Nome</ion-label>
+        <ion-input placeholder="Nome(Requerido)" formControlName="nome"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="inscricaoForm.controls.nome.invalid  && (inscricaoForm.controls.nome.dirty || inscricaoForm.controls.nome.touched)">
+        <p *ngIf="inscricaoForm.controls.nome.errors.required" class="mensagem-error">
+          O nome é requerido
+        </p>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Email</ion-label>
+        <ion-input placeholder="Email(Requerido)" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="inscricaoForm.controls.email.invalid  && (inscricaoForm.controls.email.dirty || inscricaoForm.controls.email.touched)">
+        <p *ngIf="inscricaoForm.controls.email.errors.required" class="mensagem-error">
+          O email é requerido.
+        </p>
+        <p *ngIf="inscricaoForm.controls.email.errors.email" class="mensagem-error">
+          O email deve ter um formato correto.
+        </p>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Celular</ion-label>
+        <ion-input type="tel" mask="(99)99999-9999" placeholder="Celular(Requerido)" formControlName="telefone"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="inscricaoForm.controls.telefone.invalid  && (inscricaoForm.controls.telefone.dirty || inscricaoForm.controls.telefone.touched)">
+        <p *ngIf="inscricaoForm.controls.telefone.errors.required" class="mensagem-error">
+          O celular é requerido
+        </p>
+        <p *ngIf="inscricaoForm.controls.telefone.errors.rangelength" class="mensagem-error">
+          O celular deve conter a quantidade de caracteres corretas
+        </p>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Data de Nascimento</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Data de Nascimento(Requerida)" formControlName="dataNascimento"></ion-datetime>
+      </ion-item>
+      <ion-item *ngIf="inscricaoForm.controls.dataNascimento.invalid  && (inscricaoForm.controls.dataNascimento.dirty || inscricaoForm.controls.dataNascimento.touched)">
+        <p *ngIf="inscricaoForm.controls.dataNascimento.errors.required" class="mensagem-error">
+          A Data de Nascimento é requerida
+        </p>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Sexo</ion-label>
+        <ion-select formControlName="sexo">
+          <ion-option value="f">Feminino</ion-option>
+          <ion-option value="m">Masculino</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="inscricaoForm.controls.sexo.invalid  && (inscricaoForm.controls.sexo.dirty || inscricaoForm.controls.sexo.touched)">
+        <p *ngIf="inscricaoForm.controls.sexo.errors.required" class="mensagem-error">
+          O sexo é requerido
+        </p>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Estado Civil</ion-label>
+        <ion-select formControlName="estadoCivil">
+          <ion-option value="s">Solteiro</ion-option>
+          <ion-option value="c">Casado</ion-option>
+          <ion-option value="d">Divorciado</ion-option>
+          <ion-option value="v">Viúvo</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="inscricaoForm.controls.estadoCivil.invalid  && (inscricaoForm.controls.estadoCivil.dirty || inscricaoForm.controls.estadoCivil.touched)">
+        <p *ngIf="inscricaoForm.controls.estadoCivil.errors.required" class="mensagem-error">
+          O Estado Civil é requerido
+        </p>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Senha</ion-label>
+        <ion-input type="password" placeholder="Senha(Requerido)" formControlName="senha"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="inscricaoForm.controls.senha.invalid  && (inscricaoForm.controls.senha.dirty || inscricaoForm.controls.senha.touched)">
+        <p *ngIf="inscricaoForm.controls.senha.errors.required" class="mensagem-error">
+          A senha é requerida
+        </p>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Senha confirmação</ion-label>
+        <ion-input type="password" placeholder="Senha confirmação(Requerido)" formControlName="senhaConfirmacao"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="inscricaoForm.controls.senhaConfirmacao.invalid  && (inscricaoForm.controls.senhaConfirmacao.dirty || inscricaoForm.controls.senhaConfirmacao.touched)">
+        <p *ngIf="inscricaoForm.controls.senhaConfirmacao.errors.required" class="mensagem-error">
+          A confirmação da senha é requerida
+        </p>
+        <p *ngIf="inscricaoForm.controls.senhaConfirmacao.errors.equalto" class="mensagem-error">
+          A confirmação da senha deve ser igual a senha
+        </p>
+      </ion-item>
+      <button class="btn-cadastrar" ion-button large block [disabled]="!inscricaoForm.valid" (click)="cadastrar()">CADASTRAR</button>
+
+    </form>
+  </ion-list>
+</ion-content>

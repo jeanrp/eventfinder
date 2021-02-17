@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // chrome --remote-debugging-port=9222 http://localhost:4200
+            // https://github.com/angular.com/angular-cli/issues/2453 
+            "name": "Attach to Chrome, with sourcemaps",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:8100/home",
+            "port": 9223,
+            "sourceMaps": true,
+            "trace": true,
+            "webRoot": "${workspaceRoot}",
+            "userDataDir": "${workspaceRoot}/out/chrome"
+        }
+    ]
+}

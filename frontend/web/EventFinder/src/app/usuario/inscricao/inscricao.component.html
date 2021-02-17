@@ -1,0 +1,54 @@
+<article role="cadastrar">
+  <div class="text-center" style="font-weight:bold;margin-bottom:10px;margin-top:10px;">Efetue o seu cadastro</div>
+  <form novalidate (ngSubmit)="adicionarEmpresa()" [formGroup]="inscricaoForm">
+    <div class="alert alert-danger" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error': displayMessage.cnpj}">
+      <input type="text" id="cnpj" class="form-control" [textMask]="{mask: cnpjMask}" formControlName="cnpj" placeholder="CNPJ (requerido)">
+      <span class="text-danger" *ngIf="displayMessage.cnpj">
+                                <p [innerHTML]="displayMessage.cnpj">  </p>
+      </span>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error': displayMessage.razaoSocial}">
+      <input type="text" id="razaoSocial" class="form-control" formControlName="razaoSocial" placeholder="Razão Social (requerido)">
+      <span class="text-danger" *ngIf="displayMessage.razaoSocial">
+                                <p [innerHTML]="displayMessage.razaoSocial">  </p>
+      </span>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error': displayMessage.telefone}">
+      <input type="text" id="telefone" class="form-control" [textMask]="{mask: telMask}" formControlName="telefone" placeholder="Telefone (requerido)">
+      <span class="text-danger" *ngIf="displayMessage.telefone">
+                                <p [innerHTML]="displayMessage.telefone">  </p>
+                            </span>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error': displayMessage.email}">
+      <input type="text" id="email" class="form-control" formControlName="email" placeholder="Email (requerido)">
+      <span class="text-danger" *ngIf="displayMessage.email">
+                                <p [innerHTML]="displayMessage.email">  </p>
+                            </span>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error': displayMessage.senha}">
+      <input type="password" id="senha" class="form-control" formControlName="senha" placeholder="Senha(requerido)">
+      <span class="text-danger" *ngIf="displayMessage.senha">
+                                <p [innerHTML]="displayMessage.senha">  </p>
+                            </span>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error': displayMessage.senhaConfirmacao}">
+      <input type="password" id="senhaConfirmacao" class="form-control" formControlName="senhaConfirmacao" placeholder="Confirme a senha (requerido)">
+      <span class="text-danger" *ngIf="displayMessage.senhaConfirmacao">
+                                <p [innerHTML]="displayMessage.senhaConfirmacao">  </p>
+                        </span>
+    </div>
+    <div>
+      <div class="form-group">
+        <button class="btn btn-success btn-block" id="Registrar" type="submit" [disabled]="!inscricaoForm.valid">Registrar</button>
+      </div>
+    </div>
+  </form>
+</article>
