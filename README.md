@@ -35,10 +35,10 @@ $ cd frontend/web/eventfinder && npm install
 ## Built with
 
 ### Backend
-- [NET Core 1.6](https://dotnet.microsoft.com/download/dotnet-core/3.1) - Install .NET Core 3.1 
+- [NET Core](https://dotnet.microsoft.com/download/dotnet-core/3.1) - Install .NET Core
 - [MediatR](https://github.com/jbogard/MediatR) - MediatR
 - [AutoMapper](https://automapper.org/) - AutoMapper
-- [EntityFrameworkCore](https://docs.microsoft.com/pt-br/ef/core/) - EntityFramework Core 3.1
+- [EntityFrameworkCore](https://docs.microsoft.com/pt-br/ef/core/) - EntityFramework Core
 - [JWT Token](https://jwt.io/) - JWT 
 
 ### Frontend
