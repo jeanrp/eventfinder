@@ -21,7 +21,7 @@ $ git clone https://github.com/jeanrp/eventfinder.git
 **Installing dependencies**
 
 ```
-$ on the root of the project do: dotnet build && dotnetrun
+$ on the root of the project do: dotnet build && dotnet run
 ```
  
 ```
